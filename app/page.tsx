@@ -3,6 +3,7 @@
 import ColorChoice from "./components/ColorChoice";
 import Video from "./components/Video";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const colors = [
   { name: "white", hex: "#ffffff" },
@@ -36,30 +37,44 @@ export default function Home() {
     return correctAnswers >= 4;
   };
 
+  const setDefaultVolume = () => {
+    const audioPlayer = document.querySelector("audio");
+    if (audioPlayer) {
+      audioPlayer.volume = 0.05;
+    }
+  };
+
+  useEffect(() => {
+    setDefaultVolume();
+    console.log("set the default volume");
+  }, []);
+
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen min-w-full p-8'>
-      {checkAttempt(attempt) ? (
-        <Video />
-      ) : (
-        <>
-          <div className='mb-10'>
-            <audio controls loop>
-              <source src='notes.ogg' type='audio/ogg'></source>
-              <source src='notes.mp3' type='audio/mpeg'></source>
-            </audio>
-          </div>
-          <div className='grid grid-cols-3 gap-6'>
-            {colors.map((color) => (
-              <ColorChoice
-                key={color.name}
-                name={color.name}
-                hex={color.hex}
-                action={() => updateAttempt(color.name)}
-              />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <div className='flex flex-col items-center justify-center min-h-screen min-w-full p-8'>
+        {checkAttempt(attempt) ? (
+          <Video />
+        ) : (
+          <>
+            <div className='mb-10'>
+              <audio id='audio' controls loop>
+                <source src='notes.ogg' type='audio/ogg'></source>
+                <source src='notes.mp3' type='audio/mpeg'></source>
+              </audio>
+            </div>
+            <div className='grid grid-cols-3 gap-6'>
+              {colors.map((color) => (
+                <ColorChoice
+                  key={color.name}
+                  name={color.name}
+                  hex={color.hex}
+                  action={() => updateAttempt(color.name)}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 }
