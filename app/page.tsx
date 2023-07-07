@@ -1,4 +1,8 @@
+"use client";
+
 import ColorChoice from "./components/ColorChoice";
+import Video from "./components/Video";
+import { useState } from "react";
 
 const colors = [
   { name: "white", hex: "#ffffff" },
@@ -9,15 +13,49 @@ const colors = [
   { name: "blue", hex: "#0000ff" },
 ];
 
+const key = ["red", "black", "red", "black"];
+
 export default function Home() {
+  const [attempt, setAttempt] = useState(["blue", "blue", "blue", "blue"]);
+
+  const updateAttempt = (color: string) => {
+    setAttempt([attempt[1], attempt[2], attempt[3], color]);
+    console.log(checkAttempt(attempt));
+  };
+
+  const checkAttempt = (attempt: any) => {
+    let correctAnswers = 0;
+    for (let i = 0; i < 4; i++) {
+      if (key[i] == attempt[i]) {
+        correctAnswers++;
+      }
+    }
+    return correctAnswers >= 4;
+  };
+
   return (
     <div className='flex flex-col items-center justify-center min-h-screen min-w-full p-8'>
-      <p className='mb-10'>welcome to the game</p>
-      <div className='grid grid-cols-3 gap-6'>
-        {colors.map((color) => (
-          <ColorChoice key={color.name} name={color.name} hex={color.hex} />
-        ))}
-      </div>
+      {checkAttempt(attempt) ? (
+        <Video />
+      ) : (
+        <>
+          <div className='mb-10'>
+            <audio controls>
+              <source src='notes.ogg' type='audio/ogg'></source>
+            </audio>
+          </div>
+          <div className='grid grid-cols-3 gap-6'>
+            {colors.map((color) => (
+              <ColorChoice
+                key={color.name}
+                name={color.name}
+                hex={color.hex}
+                action={() => updateAttempt(color.name)}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
