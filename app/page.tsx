@@ -2,8 +2,8 @@
 
 import ColorChoice from "./components/ColorChoice";
 import Video from "./components/Video";
-import { useState } from "react";
-import { useEffect } from "react";
+import ColorBar from "./components/ColorBar";
+import { useState, useEffect } from "react";
 
 const colors = [
   { name: "white", hex: "#ffffff" },
@@ -17,10 +17,10 @@ const colors = [
   { name: "brown", hex: "#964b00" },
 ];
 
-const key = ["red", "black", "red", "black"];
+const key = ["#ff0000", "#000000", "#ff0000", "#000000"];
 
 export default function Home() {
-  const [attempt, setAttempt] = useState([]);
+  const [attempt, setAttempt] = useState(["", "", "", ""]);
 
   const updateAttempt = (color: string) => {
     setAttempt([attempt[1], attempt[2], attempt[3], color]);
@@ -67,10 +67,11 @@ export default function Home() {
                   key={color.name}
                   name={color.name}
                   hex={color.hex}
-                  action={() => updateAttempt(color.name)}
+                  action={() => updateAttempt(color.hex)}
                 />
               ))}
             </div>
+            <ColorBar colors={attempt} />
           </>
         )}
       </div>
