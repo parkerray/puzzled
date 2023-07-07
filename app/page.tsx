@@ -11,6 +11,9 @@ const colors = [
   { name: "red", hex: "#ff0000" },
   { name: "green", hex: "#00ff00" },
   { name: "blue", hex: "#0000ff" },
+  { name: "yellow", hex: "#ffff00" },
+  { name: "pink", hex: "#ff00ff" },
+  { name: "brown", hex: "#964b00" },
 ];
 
 const key = ["red", "black", "red", "black"];
