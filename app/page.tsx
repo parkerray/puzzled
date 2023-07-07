@@ -46,7 +46,6 @@ export default function Home() {
 
   useEffect(() => {
     setDefaultVolume();
-    console.log("set the default volume");
   }, []);
 
   return (
