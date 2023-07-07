@@ -20,7 +20,7 @@ export default function Home() {
 
   const updateAttempt = (color: string) => {
     setAttempt([attempt[1], attempt[2], attempt[3], color]);
-    console.log(checkAttempt(attempt));
+    console.log(`colors colors colors colors...`);
   };
 
   const checkAttempt = (attempt: any) => {
