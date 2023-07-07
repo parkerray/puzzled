@@ -20,7 +20,7 @@ const colors = [
 const key = ["red", "black", "red", "black"];
 
 export default function Home() {
-  const [attempt, setAttempt] = useState(["blue", "blue", "blue", "blue"]);
+  const [attempt, setAttempt] = useState([]);
 
   const updateAttempt = (color: string) => {
     setAttempt([attempt[1], attempt[2], attempt[3], color]);
