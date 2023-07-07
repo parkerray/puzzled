@@ -40,8 +40,9 @@ export default function Home() {
       ) : (
         <>
           <div className='mb-10'>
-            <audio controls>
+            <audio controls loop>
               <source src='notes.ogg' type='audio/ogg'></source>
+              <source src='notes.mp3' type='audio/mpeg'></source>
             </audio>
           </div>
           <div className='grid grid-cols-3 gap-6'>
