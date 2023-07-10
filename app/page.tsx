@@ -40,7 +40,7 @@ export default function Home() {
   const setDefaultVolume = () => {
     const audioPlayer = document.querySelector("audio");
     if (audioPlayer) {
-      audioPlayer.volume = 0.05;
+      audioPlayer.volume = 0.2;
     }
   };
 
