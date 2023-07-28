@@ -22,9 +22,29 @@ const key = ["#ff0000", "#000000", "#ff0000", "#000000"];
 export default function Home() {
   const [attempt, setAttempt] = useState(["", "", "", ""]);
 
+  const resetAttempt = () => {
+    setAttempt(["", "", "", ""]);
+  }
+
   const updateAttempt = (color: string) => {
-    setAttempt([attempt[1], attempt[2], attempt[3], color]);
-    console.log(`colors colors colors colors...`);
+    const currentLength = attempt.filter((color) => color !== "").length;
+    if (currentLength == 0) {
+      setAttempt([color, "", "", ""]);
+    } else if (currentLength == 1) {
+      setAttempt([attempt[currentLength - 1], color, "", ""]);
+    } else if (currentLength == 2) {
+      setAttempt([attempt[currentLength - 2], attempt[currentLength - 1], color, ""]);
+    } else if (currentLength == 3) {
+      setAttempt([attempt[currentLength - 3], attempt[currentLength - 2], attempt[currentLength - 1], color]);
+      if (!checkAttempt([attempt[currentLength - 3], attempt[currentLength - 2], attempt[currentLength - 1], color])) {
+        console.log('try again...')
+        setTimeout(() => {
+          resetAttempt();
+        }, 500);
+      }
+    } else {
+      console.error('Could not update attempt');
+    }
   };
 
   const checkAttempt = (attempt: any) => {
